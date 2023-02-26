@@ -23,7 +23,6 @@ const show = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   const movielist: MovieList = {
-    id: req.body.id,
     userListID: req.body.userListID,
     movieID: req.body.movie,
     name: req.body.name,
@@ -47,7 +46,6 @@ const Delete = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   const movielist: MovieList = {
-    id: req.body.id,
     userListID: req.body.userListID,
     movieID: req.body.movie,
     name: req.body.name,

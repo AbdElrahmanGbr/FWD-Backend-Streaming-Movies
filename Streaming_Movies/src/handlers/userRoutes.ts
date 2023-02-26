@@ -25,7 +25,7 @@ const show = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   const user: User = {
     firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    secondName: req.body.secondName,
     email: req.body.email,
     password: req.body.password,
   };
@@ -49,7 +49,7 @@ const Delete = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
   const user: User = {
     firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    secondName: req.body.secondName,
     email: req.body.email,
     password: req.body.password,
   };

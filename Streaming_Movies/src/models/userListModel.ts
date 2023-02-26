@@ -6,7 +6,7 @@ export type UserList = {
   movieID: number;
 };
 
-export type userUpdate = {
+export type userListUpdate = {
   userID?: number | null;
   movieID?: number | null;
 };
@@ -57,7 +57,7 @@ export class userListModel {
       throw new Error(`Cannot delete userlist of id ${id} ${err}`);
     }
   }
-  async update(id: number, u: userUpdate): Promise<UserList[]> {
+  async update(id: number, u: userListUpdate): Promise<UserList[]> {
     try {
       const conn = await client.connect();
       const query = `UPDATE TABLE userlist set userID= ($1), movieID = ($2) where id = ${id} RETURNING *;`;

@@ -1,8 +1,7 @@
 CREATE TABLE movieList (
-    id SERIAL PRIMARY KEY,
-    uselistID INT REFERENCES useList(id),
+    userlistID INT REFERENCES userList(id),
     movieID INT REFERENCES movies(id),
     name varchar(25),
-    PRIMARY KEY(uselistID, movieID)
+    PRIMARY KEY(userlistID, movieID)
 );
  

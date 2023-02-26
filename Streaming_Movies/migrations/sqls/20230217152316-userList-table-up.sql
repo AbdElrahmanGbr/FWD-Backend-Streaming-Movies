@@ -1,5 +1,5 @@
-CREATE TABLE useList (
+CREATE TABLE userList (
     id SERIAL PRIMARY KEY,
-    useID INT REFERENCES users(id),
+    userID INT REFERENCES users(id),
     movieID INT 
 );

@@ -1,10 +1,10 @@
 import request from 'supertest';
-import express, { Application } from 'express';
+import express, { Express } from 'express';
 import bodyParser from 'body-parser';
 import userRoutes from '../handlers/userRoutes';
 import { User } from '../models/userModel';
 
-const app: Application = express();
+const app: Express = express();
 const PORT = 3001;
 
 app.use(bodyParser.json());
@@ -22,7 +22,7 @@ describe('Test user routes', () => {
             .post('/users')
             .send({
                 firstName: 'Abdo',
-                lastName: 'Gbr',
+                secondName: 'Gbr',
                 email: 'abdogbr@example.com',
                 password: 'password',
             });
@@ -42,7 +42,7 @@ describe('Test user routes', () => {
         expect(response.status).toBe(200);
         expect(response.body.id).toBe(testUser.id);
         expect(response.body.firstName).toBe(testUser.firstName);
-        expect(response.body.lastName).toBe(testUser.lastName);
+        expect(response.body.secondName).toBe(testUser.secondName);
         expect(response.body.email).toBe(testUser.email);
     });
 
@@ -51,15 +51,15 @@ describe('Test user routes', () => {
             .patch(`/users/${testUser.id}`)
             .send({
                 firstName: 'Abdu',
-                lastName: 'Gabr',
+                secondName: 'Gabr',
                 email: 'newemail@example.com',
                 password: 'newpassword',
             });
 
         expect(response.status).toBe(200);
         expect(response.body.id).toBe(testUser.id);
-        expect(response.body.firstName).toBe('John');
-        expect(response.body.lastName).toBe('Doe');
+        expect(response.body.firstName).toBe('Abdu');
+        expect(response.body.secondName).toBe('Gabr');
         expect(response.body.email).toBe('newemail@example.com');
     });
 
@@ -70,6 +70,3 @@ describe('Test user routes', () => {
     });
 });
 
-afterAll(async () => {
-    await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
-});

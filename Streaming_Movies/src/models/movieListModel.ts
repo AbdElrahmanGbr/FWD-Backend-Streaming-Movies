@@ -1,7 +1,6 @@
 import client from "../database";
 
 export type MovieList = {
-  id: number;
   userListID: number;
   movieID: number;
   name?: string;
@@ -29,7 +28,7 @@ export class MovieListModel {
   async show(id: number): Promise<MovieList[]> {
     try {
       const conn = await client.connect();
-      const query = `SELECT * FROM movieList where is = ($1);`;
+      const query = `SELECT * FROM movieList where id = ($1);`;
       const result = await conn.query(query, [id]);
       conn.release();
       return result.rows;
@@ -40,8 +39,8 @@ export class MovieListModel {
   async create(ml: MovieList): Promise<MovieList[]> {
     try {
       const conn = await client.connect();
-      const query = `INSERT INTO movieList (movieID, userListID) values ($1, $2)`;
-      const result = await conn.query(query, [ml.movieID, ml.userListID]);
+      const query = `INSERT INTO movielist (userlistid, movieid, name) values ($1, $2, $3)`;
+      const result = await conn.query(query, [ml.userListID, ml.movieID, ml.name]);
       conn.release();
       return result.rows;
     } catch (err) {

@@ -4,14 +4,14 @@ import bcrypt from "bcrypt";
 export type User = {
   id?: number;
   firstName: string;
-  lastName: string;
+  secondName: string;
   email: string;
   password: string;
 };
 
 export type userUpdate = {
   firstName: string | null;
-  lastName: string | null;
+  secondName: string | null;
   email?: string | null;
   password?: string | null;
 };
@@ -44,8 +44,8 @@ export class UserModel {
     try {
       const hashedPassword = await bcrypt.hash(u.password, 10);
       const conn = await client.connect();
-      const query = `INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4) RETURNING *;`;
-      await conn.query(query, [u.firstName, u.lastName, u.email, hashedPassword]);
+      const query = `INSERT INTO users (firstName, secondName, email, password) VALUES ($1, $2, $3, $4) RETURNING *;`;
+      await conn.query(query, [u.firstName, u.secondName, u.email, hashedPassword]);
       conn.release();
     } catch (err) {
       throw new Error(`Cannot create user ${err}`);
@@ -65,8 +65,8 @@ export class UserModel {
   async update(id: number, u: userUpdate): Promise<User[]> {
     try {
       const conn = await client.connect();
-      const query = `UPDATE TABLE users set firstName= ($1), lastName = ($2),  email = ($3), password = ($4) where id = ${id} RETURNING *;`;
-      const result = await conn.query(query, [u.firstName, u.lastName, u.email, u.password]);
+      const query = `UPDATE TABLE users set firstName= ($1), secondName= ($2),  email= ($3), password= ($4) where id = ${id} RETURNING *;`;
+      const result = await conn.query(query, [u.firstName, u.secondName, u.email, u.password]);
       conn.release();
       return result.rows;
     } catch (err) {

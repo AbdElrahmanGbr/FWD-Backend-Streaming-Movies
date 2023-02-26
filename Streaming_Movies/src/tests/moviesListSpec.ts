@@ -7,7 +7,6 @@ const store = new MovieListModel();
 describe('Movie List API', () => {
     let createdMovieList: MovieList;
     const movieList: MovieList = {
-        id: 1,
         userListID: 1,
         movieID: 1,
         name: 'My Movie List'
@@ -29,7 +28,7 @@ describe('Movie List API', () => {
     describe('GET /movielist/:id', () => {
         it('returns a movie list by id', async () => {
             const response = await request(app)
-                .get(`/movielist/${createdMovieList.id}`);
+                .get(`/movielist/${createdMovieList.userListID}`);
             expect(response.status).toBe(200);
             expect(response.body[0].userListID).toEqual(createdMovieList.userListID);
             expect(response.body[0].movieID).toEqual(createdMovieList.movieID);
@@ -49,13 +48,12 @@ describe('Movie List API', () => {
     describe('PATCH /movielist/:id', () => {
         it('updates a movie list', async () => {
             const updatedMovieList: MovieList = {
-                id: 1,
                 userListID: 1,
                 movieID: 2,
                 name: 'My Updated Movie List'
             };
             const response = await request(app)
-                .patch(`/movielist/${createdMovieList.id}`)
+                .patch(`/movielist/${createdMovieList.userListID}`)
                 .send(updatedMovieList);
             const updated = response.body[0];
             expect(response.status).toBe(200);
@@ -68,7 +66,7 @@ describe('Movie List API', () => {
     describe('DELETE /movielist/:id', () => {
         it('deletes a movie list', async () => {
             const response = await request(app)
-                .delete(`/movielist/${createdMovieList.id}`);
+                .delete(`/movielist/${createdMovieList.userListID}`);
             expect(response.status).toBe(200);
         });
     });
